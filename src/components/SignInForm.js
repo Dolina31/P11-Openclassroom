@@ -1,36 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { setEmail, setPassword, userLogin } from "../features/userSlice";
+import { setToken, userLogin } from "../features/userSlice";
 import { useNavigate } from "react-router-dom";
 
 const SignInForm = () => {
-  const email = useSelector((state) => state.user.email);
-  const password = useSelector((state) => state.user.password);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleEmailChange = (e) => {
-    dispatch(setEmail(e.target.value));
-  };
-
-  const handlePasswordChange = (e) => {
-    dispatch(setPassword(e.target.value));
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const formData = { email, password };
 
     const res = await dispatch(userLogin(formData));
     const resData = res.payload;
 
-    if (resData.body.token) {
+    const token = resData.body.token;
+
+    dispatch(setToken(token));
+
+    if (!token) {
       navigate("/user");
+    } else {
+      console.log(
+        "Erreur d'authentification : le token est manquant ou invalide"
+      );
     }
   };
-
   return (
     <section className="sign-in-content">
       <FontAwesomeIcon icon={faCircleUser} className="sign-in-icon" />
@@ -42,8 +42,7 @@ const SignInForm = () => {
             type="text"
             id="email"
             name="email"
-            value={email}
-            onChange={handleEmailChange}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div className="input-wrapper">
@@ -52,9 +51,12 @@ const SignInForm = () => {
             type="password"
             id="password"
             name="password"
-            value={password}
-            onChange={handlePasswordChange}
+            onChange={(e) => setPassword(e.target.value)}
           />
+        </div>
+        <div className="input-remember">
+          <label htmlFor="remember-me">Remember me</label>
+          <input type="checkbox" id="remember-me" />
         </div>
         <button className="sign-in-button" onClick={handleSubmit}>
           Sign In

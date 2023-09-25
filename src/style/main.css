@@ -61,9 +61,16 @@ html {
     color: #42b983;
   }
   
+  .main-nav-item-position {
+    display: flex;
+    flex-direction: row;
+  }
   .main-nav-item {
+    display: flex;
+    gap: 5px;
+    align-items: center;
     text-decoration: none;
-    margin-right: 0.5rem;
+    margin-right: 1rem;
   }
   
   .main-nav-item:hover {
@@ -186,7 +193,7 @@ html {
   }
   
   .sign-in-icon {
-    font-size: 1.15rem;
+    font-size: 1.50rem;
   }
 
   .nav-icon {
@@ -220,6 +227,10 @@ html {
     font-size: 1.2rem;
   }
   
+.icon {
+  font-size: 1.35em;
+}
+
   .footer {
     display: flex;
     justify-content: center;

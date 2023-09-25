@@ -3,16 +3,11 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 const userSlice = createSlice({
   name: "user",
   initialState: {
-    email: "",
-    password: "",
-    token: null,
+    token: "",
   },
   reducers: {
-    setEmail: (state, action) => {
-      state.email = action.payload;
-    },
-    setPassword: (state, action) => {
-      state.password = action.payload;
+    setToken: (state, action) => {
+      state.token = action.payload;
     },
   },
 });
@@ -27,12 +22,12 @@ export const userLogin = createAsyncThunk(
         "Content-Type": "application/json",
       },
     });
+
     const data = await response.json();
 
     return data;
   }
 );
 
-export const { setEmail, setPassword } = userSlice.actions;
-export const selectIsUserLoggedIn = (state) => !!state.user.token;
+export const { setToken } = userSlice.actions;
 export default userSlice.reducer;
