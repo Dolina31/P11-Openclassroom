@@ -6,16 +6,15 @@ import {
   faRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { setToken } from "../features/userSlice";
 
 const Navigation = () => {
   const token = useSelector((state) => state.user.token);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleSignOut = () => {
     dispatch(setToken(null));
+    localStorage.removeItem("token");
   };
 
   return (
@@ -30,7 +29,7 @@ const Navigation = () => {
       </NavLink>
       {token ? (
         <div className="main-nav-item-position">
-          <NavLink className="main-nav-item" to="/">
+          <NavLink className="main-nav-item" to="/user">
             <FontAwesomeIcon icon={faCircleUser} className="icon" />
             Tony
           </NavLink>

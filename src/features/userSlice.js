@@ -12,7 +12,7 @@ const userSlice = createSlice({
   },
 });
 
-export const userLogin = createAsyncThunk(
+export const userLoginRequest = createAsyncThunk(
   "user/userLogin",
   async (formData) => {
     const response = await fetch("http://localhost:3001/api/v1/user/login", {

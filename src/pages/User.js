@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
 import Account from "../components/Account";
+import Button from "../components/Button";
+import EditNameModal from "../components/EditNameModal";
 
 const User = () => {
+  const [handleModal, setHandleModal] = useState(false);
+
+  const toggleModal = () => {
+    setHandleModal(!handleModal);
+  };
+
   return (
     <div className="page">
       <Navigation />
@@ -11,8 +19,13 @@ const User = () => {
         <div className="header">
           <h1>
             Welcome back <br></br> Tony Jarvis!
-          </h1>
-          <button className="edit-button">Edit Name</button>
+          </h1>{" "}
+          <Button
+            title="Edit Name"
+            className={"edit-button"}
+            onClick={toggleModal}
+          />
+          {handleModal && <EditNameModal onClose={toggleModal} />}
         </div>
         <Account
           title={"Argent Bank Checking "}
