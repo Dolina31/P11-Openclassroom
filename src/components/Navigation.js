@@ -10,9 +10,10 @@ import { setToken } from "../features/userSlice";
 
 const Navigation = () => {
   const token = useSelector((state) => state.user.token);
+  const userName = useSelector((state) => state.user.userName);
   const dispatch = useDispatch();
 
-  const handleSignOut = () => {
+  const handleLogOut = () => {
     dispatch(setToken(null));
     localStorage.removeItem("token");
   };
@@ -31,9 +32,9 @@ const Navigation = () => {
         <div className="main-nav-item-position">
           <NavLink className="main-nav-item" to="/user">
             <FontAwesomeIcon icon={faCircleUser} className="icon" />
-            Tony
+            {userName}
           </NavLink>
-          <NavLink className="main-nav-item" to="/" onClick={handleSignOut}>
+          <NavLink className="main-nav-item" to="/" onClick={handleLogOut}>
             <FontAwesomeIcon icon={faRightFromBracket} className="icon" />
             Sign Out
           </NavLink>

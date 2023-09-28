@@ -30,9 +30,10 @@ const SignInForm = () => {
     } else if (token && !rememberMeisChecked) {
       navigate("/user");
     } else {
-      console.log();
+      console.log("test");
     }
   };
+
   return (
     <section className="sign-in-content">
       <FontAwesomeIcon icon={faCircleUser} className="sign-in-icon" />

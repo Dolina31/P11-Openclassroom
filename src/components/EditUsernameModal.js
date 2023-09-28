@@ -2,13 +2,28 @@ import React, { useState } from "react";
 import Button from "./Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserPen, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { setUserName, editUserName } from "../features/userSlice";
+import { useDispatch } from "react-redux";
 
-const EditNameModal = ({ onClose }) => {
+const EditUsernameModal = ({ onClose }) => {
   const [isOpen, setIsOpen] = useState(true);
+  const [newUserName, setNewUserName] = useState("");
 
   const closeModal = () => {
     setIsOpen(false);
     onClose();
+  };
+
+  const dispatch = useDispatch();
+
+  const handleUsernameSubmit = () => {
+    if (newUserName !== "") {
+      dispatch(setUserName(newUserName));
+      dispatch(editUserName());
+      closeModal();
+    } else {
+      console.log("Please entrer a new username");
+    }
   };
 
   return (
@@ -23,29 +38,25 @@ const EditNameModal = ({ onClose }) => {
             />
             <div className="modal-background">
               <FontAwesomeIcon icon={faUserPen} className="icon" />
-              <h1>Edit Your Name</h1>
+              <h1>Edit Your Username</h1>
               <form action="" className="modal-form">
                 <div className="input-wrapper">
-                  <label htmlFor="firstName">First Name</label>
+                  <label htmlFor="username">New Username</label>
                   <input
                     type="text"
-                    id="firstName"
-                    name="firstName"
+                    id="username"
+                    name="username"
                     className="modal-input"
-                  />
-                </div>
-                <div className="input-wrapper">
-                  <label htmlFor="lastName">Last Name</label>
-                  <input
-                    type="text"
-                    id="lastName"
-                    name="lastName"
-                    className="modal-input"
+                    onChange={(e) => setNewUserName(e.target.value)}
                   />
                 </div>
               </form>{" "}
               <div className="modal-button-flex">
-                <Button title="Confirm" className={"transaction-button"} />
+                <Button
+                  title="Confirm"
+                  className={"transaction-button"}
+                  onClick={handleUsernameSubmit}
+                />
               </div>
             </div>
           </dialog>
@@ -54,4 +65,5 @@ const EditNameModal = ({ onClose }) => {
     </div>
   );
 };
-export default EditNameModal;
+
+export default EditUsernameModal;
