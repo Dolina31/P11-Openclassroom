@@ -13,8 +13,7 @@ const User = () => {
     setHandleModal(!handleModal);
   };
 
-  const firstName = useSelector((state) => state.user.firstName);
-  const lastName = useSelector((state) => state.user.lastName);
+  const userName = useSelector((state) => state.user.userName);
 
   return (
     <div className="page">
@@ -23,10 +22,10 @@ const User = () => {
         <div className="header">
           <h1>
             Welcome back <br></br>
-            {firstName} {lastName}!
+            {userName}!
           </h1>{" "}
           <Button
-            title="Edit Username"
+            title="Edit name"
             className={"edit-button"}
             onClick={toggleModal}
           />

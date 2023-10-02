@@ -196,6 +196,9 @@ html {
     font-size: 1.50rem;
   }
 
+  .error-message {
+    color: red;
+  }
   .nav-icon {
     margin-right: 5px;
   }
@@ -289,7 +292,7 @@ html {
   }
 
   dialog {
-    height: 40%;
+    height: 45%;
     width: 20%;
   }
 
@@ -297,8 +300,8 @@ html {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 20px;
-    margin-top: 40px;
+    align-items: center;
+    margin-top: 20px;
   }
 
   .modal-background {
@@ -306,20 +309,23 @@ html {
     height: 93%;
   }
 
+  .modal-input-wrapper {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    margin-bottom: 1rem;
+    gap: 15px;
+  }
+
   .modal-input {
     padding: 10px;
     margin-top: 5px;
-    width: 93%;
+    width: 55%;
   }
 
-  .modal-exit-button {
-    cursor: pointer;
-    font-size: 1.2em;
-    position: absolute;
-    top: 15px;
-    right: 20px;
-  }
-  
+  .modal-button {
+    width: 150px !important;
+}
   .modal-overlay {
     position: fixed;
     top: 0;
@@ -336,6 +342,7 @@ html {
     display: flex;
     justify-content: center;
     margin-top: 20px;
+    gap: 20px;
   }
 
   .header {

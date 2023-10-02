@@ -10,6 +10,7 @@ const SignInForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMeisChecked, setRememberMeisChecked] = useState(false);
+  const [error, setError] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -18,19 +19,27 @@ const SignInForm = () => {
 
     const formData = { email, password };
 
-    const res = await dispatch(userLoginRequest(formData));
-    const resData = res.payload;
-    const token = resData.body.token;
+    try {
+      const res = await dispatch(userLoginRequest(formData));
+      const resData = res.payload;
+      const token = resData.body.token;
 
-    dispatch(setToken(token));
+      dispatch(setToken(token));
 
-    if (token && rememberMeisChecked) {
-      navigate("/user");
-      localStorage.setItem("token", token);
-    } else if (token && !rememberMeisChecked) {
-      navigate("/user");
-    } else {
-      console.log("test");
+      if (token && rememberMeisChecked) {
+        navigate("/user");
+        localStorage.setItem("token", token);
+      } else if (token && !rememberMeisChecked) {
+        navigate("/user");
+      } else {
+        console.log("test");
+      }
+    } catch (error) {
+      if (email === "" || password === "") {
+        setError("Please fill in all the required fields.");
+      } else {
+        setError("Email or password incorrect");
+      }
     }
   };
 
@@ -38,6 +47,7 @@ const SignInForm = () => {
     <section className="sign-in-content">
       <FontAwesomeIcon icon={faCircleUser} className="sign-in-icon" />
       <h1>Sign In</h1>
+      {error && <p className="error-message">{error}</p>}{" "}
       <form>
         <div className="input-wrapper">
           <label htmlFor="email">Email</label>

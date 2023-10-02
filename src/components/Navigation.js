@@ -20,7 +20,7 @@ const Navigation = () => {
 
   return (
     <nav className="main-nav">
-      <NavLink className="main-nav-logo" to="/">
+      <NavLink className="main-nav-logo" to={token ? "/user" : "/"}>
         <img
           className="main-nav-logo-image"
           src="./img/argentBankLogo.png"
