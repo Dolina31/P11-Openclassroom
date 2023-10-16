@@ -61,7 +61,7 @@ export const userProfileData = createAsyncThunk(
   }
 );
 
-// requête changement dun nom de l'utilisateur
+// requête changement du nom de l'utilisateur
 export const editUserName = createAsyncThunk(
   "user/editUserName",
   async (_, { getState }) => {

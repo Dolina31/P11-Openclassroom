@@ -18,9 +18,6 @@ const App = () => {
 
   useEffect(() => {
     if (token) {
-      // si un token existe, mise à jour le store Redux avec le token
-      dispatch(setToken(token));
-
       // récupération des données du profil de l'utilisateur à partir du serveur
       dispatch(userProfileData()).then((resultAction) => {
         // extrait les données du profil de la réponse
