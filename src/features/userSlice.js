@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 const userSlice = createSlice({
   name: "user",
   initialState: {
-    token: "",
+    token: localStorage.getItem("token") || "", // récupération du token depuis le localStorage s'il est présent, sinon initialisation avec une chaîne vide.
     firstName: "",
     lastName: "",
     userName: "",
@@ -24,6 +24,7 @@ const userSlice = createSlice({
   },
 });
 
+// requête de connexion
 export const userLoginRequest = createAsyncThunk(
   "user/userLogin",
   async (formData) => {
@@ -41,10 +42,11 @@ export const userLoginRequest = createAsyncThunk(
   }
 );
 
+// requête récupération données utilisateur
 export const userProfileData = createAsyncThunk(
   "user/userProfileData",
   async (_, { getState }) => {
-    const { token } = getState().user;
+    const { token } = getState().user; // récupération du token dans le store
     const response = await fetch("http://localhost:3001/api/v1/user/profile", {
       method: "POST",
       headers: {
@@ -59,10 +61,11 @@ export const userProfileData = createAsyncThunk(
   }
 );
 
+// requête changement dun nom de l'utilisateur
 export const editUserName = createAsyncThunk(
   "user/editUserName",
   async (_, { getState }) => {
-    const { userName, token } = getState().user;
+    const { userName, token } = getState().user; // récupération de nom utilisateur et du token
     const response = await fetch("http://localhost:3001/api/v1/user/profile", {
       method: "PUT",
       headers: {

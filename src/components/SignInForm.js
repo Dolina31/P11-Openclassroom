@@ -22,17 +22,15 @@ const SignInForm = () => {
     try {
       const res = await dispatch(userLoginRequest(formData));
       const resData = res.payload;
-      const token = resData.body.token;
+      const token = resData.body.token; // récupération du token de la réponse de la requête d'authentification.
 
-      dispatch(setToken(token));
+      dispatch(setToken(token)); // mise à jour le store Redux avec le token
 
       if (token && rememberMeisChecked) {
         navigate("/user");
         localStorage.setItem("token", token);
       } else if (token && !rememberMeisChecked) {
         navigate("/user");
-      } else {
-        console.log("test");
       }
     } catch (error) {
       if (email === "" || password === "") {

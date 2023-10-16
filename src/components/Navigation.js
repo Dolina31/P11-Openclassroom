@@ -13,8 +13,9 @@ const Navigation = () => {
   const userName = useSelector((state) => state.user.userName);
   const dispatch = useDispatch();
 
+  // Fonction pour gérer la déconnexion de l'utilisateur
   const handleLogOut = () => {
-    dispatch(setToken(null));
+    dispatch(setToken(null)); // Suppression du token du store Redux en le mettant à null
     localStorage.removeItem("token");
   };
 

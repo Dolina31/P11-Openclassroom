@@ -17,13 +17,14 @@ const EditUsernameModal = ({ onClose }) => {
 
   const dispatch = useDispatch();
 
+  // Gestion de la soumission du formulaire de modification du nom d'utilisateur
   const handleUsernameSubmit = () => {
     if (newUserName !== "") {
-      dispatch(setUserName(newUserName));
-      dispatch(editUserName());
+      dispatch(setUserName(newUserName)); // Si un nouveau nom d'utilisateur est saisi, mise à jour le store Redux avec le nouveau nom.
+      dispatch(editUserName()); // Lance une action pour effectuer la modification du nom d'utilisateur côté serveur.
       closeModal();
     } else if (newUserName === "") {
-      setError("Please fill in all the required fields.");
+      setError("Please fill in all the required fields."); // Si le champ du nouveau nom d'utilisateur est vide, affiche un message d'erreur.
     }
   };
 

@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
 import Account from "../components/Account";
 import Button from "../components/Button";
 import EditUsernameModal from "../components/EditUsernameModal";
+import { useNavigate } from "react-router-dom";
 
 const User = () => {
   const [handleModal, setHandleModal] = useState(false);
@@ -14,6 +15,15 @@ const User = () => {
   };
 
   const userName = useSelector((state) => state.user.userName);
+  const token = useSelector((state) => state.user.token);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // redirection vers la page d'acceuil en cas d'absence du token
+    if (!token) {
+      navigate("/");
+    }
+  });
 
   return (
     <div className="page">
